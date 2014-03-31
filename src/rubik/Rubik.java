@@ -19,7 +19,7 @@ public class Rubik {
         // TODO code application logic here
         Cubo cubo = new Cubo();
         cubo.print();
-        String a=cubo.revolver(5);
+        String a=cubo.revolver(50);
         //cubo.rotar(Mov.FRONT, 1);
         //cubo.rotar(Mov.FRONT, 1);
         //cubo.rotar(Mov.DOWN, -1);
