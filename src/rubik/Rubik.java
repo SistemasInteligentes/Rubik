@@ -19,7 +19,12 @@ public class Rubik {
         // TODO code application logic here
         Cubo cubo = new Cubo();
         cubo.print();
-        cubo.revolver();
+        //String a=cubo.revolver(5);
+        cubo.rotar(Mov.FRONT, 1);
+        //System.out.println(a);
+        cubo.print();
+        AgenteRubikBasico juanito= new AgenteRubikBasico(cubo);
+        juanito.ordenarCubo();
         cubo.print();
     }
 }

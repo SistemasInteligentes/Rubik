@@ -20,6 +20,47 @@ public class FichaRubik {
         this.direccion = direccion;
     }
     
+    public char getLetra(int i){
+        switch(i){
+            case 0: return 'F'; 
+            case 1: return 'U'; 
+            case 2: return 'R'; 
+            case 3: return 'D'; 
+            case 4: return 'L'; 
+            case 5: return 'B'; 
+        }
+        //ToDo: Retornar excepcion
+        return 'x';
+    }
+
+    public String getOrientacion(char f, char u){
+        char t;
+        char frontal='x';
+        char superior='x';
+        //System.out.println("Dirección es: "+direccion);
+        for(int i=0;i<6;i++){
+            t=direccion.charAt(i);
+            //System.out.println("Buscando t=: "+t);
+            //System.out.println("Comparando con =: "+f);
+            if (t==f){
+                //System.out.println("LA ENCONTREE "+f);
+                frontal = getLetra(i);
+            }
+        }
+        for(int i=0;i<6;i++){
+            t=direccion.charAt(i);
+            if (t==u){
+                superior = getLetra(i);
+            }
+        }
+        return ""+frontal+superior;
+    }
+    
+    
+    
+    
+    
+    
     public void rotarFichaFront(int direccionGiro ){
         if(direccionGiro>=0){
             String aux = ""+direccion.charAt(4);

@@ -48,20 +48,60 @@ public class Cubo {
         tablero[26]= new FichaRubik(26,""+"xx"+Col.R+Col.G+"x"+Col.Y);
         
     }
-    public void revolver(){
-        
-        for (int i=0;i<5;i++){
+    public String revolver(int n){
+        String algoritmo = "";
+        for (int i=0;i<n;i++){
             Mov mov = Mov.values()[(int)(Math.random()*Mov.values().length)];
             int direccion = -1+2*(int)(Math.random()*2);
-            System.out.println(mov);
-            System.out.println(direccion);
             rotar(mov, direccion);
+            algoritmo += mov.name().charAt(0);
+            if (direccion==-1){
+                algoritmo += '\'';
+            }
         }
+        return algoritmo;
     }
     public void rotarCubo (){
         
     }
-    public void correrAlgoritmo(){
+    public void correrAlgoritmo(String algo){
+        System.out.println("Corriendo el algoritmo: "+algo);
+        Mov movimiento=Mov.FRONT;
+        int direccion=0;
+        for(int i=0;i<algo.length();i++){
+            direccion = 1;
+            switch(algo.charAt(i)){
+                case 'F':
+                    movimiento=Mov.FRONT;
+                    break;
+                case 'U':
+                    movimiento=Mov.UP;
+                    break;
+                case 'R':
+                    movimiento=Mov.RIGHT;
+                    break;
+                case 'D':
+                    movimiento=Mov.DOWN;
+                    break;
+                case 'L':
+                    movimiento=Mov.LEFT;
+                    break;
+                case 'B':
+                    movimiento=Mov.BACK;
+                    break;
+                case '\'':
+                    direccion=-2;
+            }
+            if (direccion!=-2){
+                direccion = 1;
+                if (algo.length()>i+1){
+                    if (algo.charAt(i+1)=='\''){
+                        direccion = -1;
+                    }
+                }
+                rotar(movimiento, direccion);
+            }
+        }
         
     }
     public void rotar(Mov cara, int direccion){

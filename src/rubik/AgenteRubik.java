@@ -11,7 +11,6 @@ package rubik;
  * @author samsung
  */
 public interface AgenteRubik {
-
     public abstract void ordenarCubo();
     public abstract String getRuta();
     
