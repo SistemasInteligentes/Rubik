@@ -41,25 +41,25 @@ public class AgenteRubikBasico implements AgenteRubik{
             if (cubo.tablero[i].id==1){
                 
                 if(
-                        cubo.tablero[i].direccion==cuboBase.tablero[1].direccion &&
+                        cubo.tablero[i].direccion.equals(cuboBase.tablero[1].direccion) &&
                         cubo.tablero[i].id==cuboBase.tablero[1].id
                         ){
                     System.out.println("La ficha esta organizada.");
                 }else{
-                    System.out.println("La ficha 1 esta en: "+i);
-                    System.out.println("La dirección es: "+cubo.tablero[i].direccion);
-                    System.out.println("La ubicación es:");
+                    //System.out.println("La ficha 1 esta en: "+i);
+                    //System.out.println("La dirección es: "+cubo.tablero[i].direccion);
+                    //System.out.println("La ubicación es:");
                     orientacion = cubo.tablero[i].getOrientacion(
                             cubo.tablero[4].direccion.charAt(0),
                             cubo.tablero[10].direccion.charAt(1)
                     );
-                    System.out.println(orientacion);
+                    //System.out.println(orientacion);
                     
                     for(int j=0;j<memoria.length;j++){
                         if(memoria[j][0].equals(""+i)){
                             if(memoria[j][1].equals(orientacion)){
-                                System.out.println("El algoritmo es: ["+memoria[j][2]+"]");
-                                cubo.correrAlgoritmo(""+memoria[j][2]);
+                                //System.out.println("El algoritmo es: ["+memoria[j][2]+"]");
+                                cubo.correrAlgoritmo(armarAlgoritmo(j));
                                 break;
                             }
                         }
@@ -72,6 +72,15 @@ public class AgenteRubikBasico implements AgenteRubik{
         }
     }
 
+    private String armarAlgoritmo(int i){
+        String algo=memoria[i][2];
+        int aux=0;
+        try{
+            aux = Integer.parseInt(memoria[i][3]);
+            algo+=armarAlgoritmo(aux);
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){}
+        return algo;
+    }
     @Override
     public String getRuta() {
         return ruta;
@@ -93,26 +102,26 @@ public class AgenteRubikBasico implements AgenteRubik{
         {"19",	"BU",	"UU"},      //Subcaso 2
         {"3",	"FL",	"F"},       //Subcaso 3
         {"5",	"FR",	"F'"},      //Subcaso 4
-        {"7",	"FD",	"FF"}       //Subcaso 5
-    };
+        {"7",	"FD",	"FF"},       //Subcaso 5
+        {"3",	"LF",	"L'", "0"},
+        {"15",	"LD",	"LL",	"0"},
+        {"21",	"LB",	"L",	"0"},
+        {"5",	"RF",	"R",	"1"},
+        {"17",	"RD",	"RR",	"1"},
+        {"23",	"RB",	"R'",	"1"},
+        {"21",	"BL",	"B'",	"2"},
+        {"23",	"BR",	"B",	"2"},
+        {"25",	"BD",	"BB",	"2"},
+        {"17",	"DR",	"R",	"4"},
+        {"15",	"DL",	"L'",	"3"},
+        {"25",	"DB",	"D'",	"15"},
+        {"7",	"DF",	"D",	"15"},
+        {"1",	"UF",	"F",	"9"},
+        {"9",	"UL",	"L",	"3"},
+        {"11",	"UR",	"R'",	"4"},
+        {"19",	"UB",	"B",	"8"}
+};
     /*
-3	LF	L'	Subcaso0
-15	LD	LL	Subcaso0
-21	LB	L	Subcaso0
-5	RF	R	Subcaso1
-17	RD	RR	Subcaso1
-23	RB	R'	Subcaso1
-21	BL	B'	Subcaso2
-23	BR	B	Subcaso2
-25	BD	BB	Subcaso2
-17	DR	R	Subcaso4
-15	DL	L'	Subcaso3
-25	DB	D'	Subcaso15
-7	DF	D	Subcaso15
-1	UF	F	Subcaso9
-9	UL	L	Subcaso3
-11	UR	R'	Subcaso4
-19	UB	B	Subcaso8
     
     */
     
