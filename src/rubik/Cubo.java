@@ -61,9 +61,133 @@ public class Cubo {
         }
         return algoritmo;
     }
-    public void rotarCubo (){
+    public void rotarCentroFront (int direccion){        
+        FichaRubik[] matrizAux= new FichaRubik[9];
+        //3*j+9+i/*original*/
+        //j+15-3*i/*destino+1*/
+        //3*i+11-j/*destino-1*/
+        if(direccion>=0){
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    System.out.println("posicion matriz: "+(3*j+9+i));
+                    matrizAux[(3*j)+i] = tablero[j+15-3*i];
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    tablero[3*j+9+i] = matrizAux[(3*j)+i];
+                    tablero[3*j+9+i].rotarFichaFront(direccion);
+                }
+            }
+        }else{
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    matrizAux[(3*j)+i] = tablero[3*i+11-j];
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    tablero[3*j+9+i] = matrizAux[(3*j)+i];
+                    tablero[3*j+9+i].rotarFichaFront(direccion);
+                }
+            }
+        }
+    }
+    
+    public void rotarCentroUp (int direccion){        
+        FichaRubik[] matrizAux= new FichaRubik[9];
+        //(21+i)-9*j/*original*/
+        //3+j+9*i/*destino+1*/
+        //23-9*i-j/*destino-1*/
+        
+        
+        if(direccion>=0){
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    //matrizAux[(3*j)+i] = tablero[3+9*i+j];
+                    matrizAux[(3*j)+i] = tablero[5+9*i-j];
+                    System.out.println("->"+(5+9*i-j)+" - "+tablero[5+9*i-j].direccion);
+//                    matrizAux[(3*j)+i] = tablero[(3+j)+9*i]; //primera
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+//                    tablero[(21+i)-9*j] = matrizAux[(3*j)+i];
+//                    tablero[(21+i)-9*j].rotarFichaFront(direccion);
+                    tablero[3+i+(9*j)] = matrizAux[(3*j)+i];
+                    tablero[3+i+(9*j)].rotarFichaUp(direccion);
+                }
+            }
+        }else{
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    matrizAux[(3*j)+i] = tablero[21-9*i+j];
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    //tablero[(21+i)-9*j] = matrizAux[(3*j)+i];
+                    //tablero[(21+i)-9*j].rotarFichaUp(direccion);
+                    tablero[3+i+(9*j)] = matrizAux[(3*j)+i];
+                    tablero[3+i+(9*j)].rotarFichaUp(direccion);
+                }
+            }
+        }
+    }
+    
+    public void rotarCentroRight (int direccion){        
+        FichaRubik[] matrizAux= new FichaRubik[9];
+        //3*j+1+9*i/*original*/
+        //7-3*i+9*j/*destino+1*/
+        //19+3*i-9*j/*destino-1*/
+        if(direccion>=0){
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    matrizAux[(3*j)+i] = tablero[7-3*i+9*j];
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    tablero[3*j+1+9*i] = matrizAux[(3*j)+i];
+                    tablero[3*j+1+9*i].rotarFichaRight(direccion);
+                }
+            }
+        }else{
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    matrizAux[(3*j)+i] = tablero[19+3*i-9*j];
+                }
+            }
+            for(int j=0;j<3;j++){
+                for(int i=0;i<3;i++){
+                    tablero[3*j+1+9*i] = matrizAux[(3*j)+i];
+                    tablero[3*j+1+9*i].rotarFichaRight(direccion);
+                }
+            }
+        }
+    }
+    
+    public void rotarCubo(Mov cara, int direccion){
+        switch(cara){
+            case FRONT:
+                rotarFront(direccion);
+                rotarCentroFront(direccion);
+                rotarBack(-direccion);
+                break;
+            case UP:
+                rotarUp(direccion);
+                rotarCentroUp(direccion);
+                rotarDown(-direccion);
+                break;
+            case RIGHT:
+                rotarRight(direccion);
+                rotarCentroRight(direccion);
+                rotarLeft(-direccion);
+                break;
+        }
         
     }
+    
     public void correrAlgoritmo(String algo){
         System.out.println("Corriendo el algoritmo: "+algo);
         Mov movimiento=Mov.FRONT;
@@ -366,11 +490,11 @@ public class Cubo {
             cara3 += "\n"; 
         }
         general= resultadoU+general+resultadoD+"\n";
-
-        System.out.println(cara1);
-        System.out.println(cara2);
-        System.out.println(cara3);
-        System.out.println(general);
+/*
+        System.out.println("frente \n"+cara1);
+        System.out.println("centro front \n"+cara2);
+        System.out.println("cara 3 \n"+cara3);
+*/        System.out.println(general);
         
     }
 
