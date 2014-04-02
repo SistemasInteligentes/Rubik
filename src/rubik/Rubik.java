@@ -18,14 +18,18 @@ public class Rubik {
     public static void main(String[] args) {
         // TODO code application logic here
         Cubo cubo = new Cubo();
-        String a="";
+//        String a="RFRFD'UFDL'";
+        String a="RFRF";
+        cubo.correrAlgoritmo(a);
         a=cubo.revolver(50);
-        cubo.rotar(Mov.FRONT, 1);
-        cubo.rotar(Mov.RIGHT, -1);
-        cubo.rotar(Mov.DOWN, -1);
-        cubo.rotar(Mov.FRONT, 1);
-        cubo.rotar(Mov.FRONT, 1);
-        cubo.print();
+        
+//        cubo.rotar(Mov.FRONT, 1);
+//        cubo.rotar(Mov.RIGHT, -1);
+//        cubo.rotar(Mov.DOWN, -1);
+//        cubo.rotar(Mov.FRONT, 1);
+//        cubo.rotar(Mov.FRONT, 1);
+//        cubo.print();
+                
 //        cubo.rotar(Mov.FRONT, 1);
 //        cubo.rotarCubo(Mov.FRONT, 1);
 //        cubo.print();
@@ -36,10 +40,12 @@ public class Rubik {
         //cubo.rotar(Mov.FRONT, 1);
         //cubo.rotar(Mov.DOWN, -1);
         //cubo.rotar(Mov.LEFT, 1);
-//        cubo.print();
+        cubo.print();
+        
         AgenteRubikBasico juanito= new AgenteRubikBasico(cubo);
-        System.out.println("Algoritmo de desordenamiento: "+a);
+//        System.out.println("Algoritmo de desordenamiento: "+a);
         juanito.ordenarCubo();
+        System.out.println("ruta: "+juanito.ruta);
         cubo.print();
     }
 }

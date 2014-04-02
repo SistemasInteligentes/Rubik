@@ -69,7 +69,7 @@ public class Cubo {
         if(direccion>=0){
             for(int j=0;j<3;j++){
                 for(int i=0;i<3;i++){
-                    System.out.println("posicion matriz: "+(3*j+9+i));
+                    //System.out.println("posicion matriz: "+(3*j+9+i));
                     matrizAux[(3*j)+i] = tablero[j+15-3*i];
                 }
             }
@@ -106,7 +106,7 @@ public class Cubo {
                 for(int i=0;i<3;i++){
                     //matrizAux[(3*j)+i] = tablero[3+9*i+j];
                     matrizAux[(3*j)+i] = tablero[5+9*i-j];
-                    System.out.println("->"+(5+9*i-j)+" - "+tablero[5+9*i-j].direccion);
+                    //System.out.println("->"+(5+9*i-j)+" - "+tablero[5+9*i-j].direccion);
 //                    matrizAux[(3*j)+i] = tablero[(3+j)+9*i]; //primera
                 }
             }

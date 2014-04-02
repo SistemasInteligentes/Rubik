@@ -55,9 +55,39 @@ public class FichaRubik {
         }
         return ""+frontal+superior;
     }
-    
-    
-    
+    public String getOrientacionEsquinas(char f, char u, char l){
+        char t;
+        char frontal='x';
+        char superior='x';
+        char izquierda='x';
+//        System.out.println("Dirección es: "+direccion);
+//        System.out.println("Buscando...: "+f+" "+u+" "+l);
+        
+        for(int i=0;i<6;i++){
+            t=direccion.charAt(i);
+//            System.out.println("Buscando t=: "+t);
+//            System.out.println("Comparando con =: "+f);
+            if (t==f){
+                //System.out.println("LA ENCONTREE "+f);
+                frontal = getLetra(i);
+            }
+        }
+        for(int i=0;i<6;i++){
+            t=direccion.charAt(i);
+            if (t==u){
+                superior = getLetra(i);
+            }
+        }
+        for(int i=0;i<6;i++){
+            t=direccion.charAt(i);
+//            System.out.println("++Buscando t=: "+t);
+//            System.out.println("++Comparando con =: "+l);
+            if (t==l){
+                izquierda = getLetra(i);
+            }
+        }
+        return ""+frontal+superior+izquierda;
+    }
     
     
     
