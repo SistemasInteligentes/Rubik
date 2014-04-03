@@ -19,9 +19,9 @@ public class Rubik {
         // TODO code application logic here
         Cubo cubo = new Cubo();
 //        String a="RFRFD'UFDL'";
-        String a="RFRF";
+        String a="FFRRF";
         cubo.correrAlgoritmo(a);
-        a=cubo.revolver(50);
+        System.out.println(cubo.revolver(50));
         
 //        cubo.rotar(Mov.FRONT, 1);
 //        cubo.rotar(Mov.RIGHT, -1);

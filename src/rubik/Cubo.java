@@ -48,6 +48,7 @@ public class Cubo {
         tablero[26]= new FichaRubik(26,""+"xx"+Col.R+Col.G+"x"+Col.Y);
         
     }
+    
     public String revolver(int n){
         String algoritmo = "";
         for (int i=0;i<n;i++){
@@ -61,6 +62,7 @@ public class Cubo {
         }
         return algoritmo;
     }
+    
     public void rotarCentroFront (int direccion){        
         FichaRubik[] matrizAux= new FichaRubik[9];
         //3*j+9+i/*original*/
@@ -228,6 +230,7 @@ public class Cubo {
         }
         
     }
+    
     public void rotar(Mov cara, int direccion){
         switch(cara){
             case FRONT:
@@ -281,8 +284,7 @@ public class Cubo {
             }
         }
     }
-    
-    
+        
     private void rotarUp(int direccion){
         
         FichaRubik[] matrizAux= new FichaRubik[9];
@@ -344,6 +346,7 @@ public class Cubo {
             }
         }
     }
+    
     private void rotarDown(int direccion){
         
         FichaRubik[] matrizAux= new FichaRubik[9];
@@ -374,6 +377,7 @@ public class Cubo {
             }
         }
     }
+    
     private void rotarLeft(int direccion){
         
         FichaRubik[] matrizAux= new FichaRubik[9];
@@ -405,6 +409,7 @@ public class Cubo {
 
         }
     }
+    
     private void rotarBack(int direccion){
         
         FichaRubik[] matrizAux= new FichaRubik[9];
@@ -435,19 +440,13 @@ public class Cubo {
             }
         }
     }
-
-
-    
+   
     public void determinarPosFichaMal(){
         
     }
     public void verificarEstado(){
         
     }
-    
-    
-    
-    
     
     public void print(){
         String resultadoF ="";
