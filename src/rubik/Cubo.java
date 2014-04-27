@@ -479,6 +479,16 @@ public class Cubo {
                 resultadoD += ""+tablero[(9*j)+6+i].direccion.charAt(3);
                 resultadoL += ""+tablero[(9*(2-i))+(3*j)].direccion.charAt(4);
                 resultadoB += ""+tablero[(3*j)+18+(2-i)].direccion.charAt(5);
+//                cara1 += " "+tablero[(3*j)+i].id;
+//                cara2 += " "+tablero[9+(3*j)+i].id;
+//                cara3 += " "+tablero[18+(3*j)+i].id;
+//                resultadoF += ""+((3*j)+i)+tablero[(3*j)+i].direccion.charAt(0);
+//                resultadoU += ""+((9*(2-j))+i)+tablero[(9*(2-j))+i].direccion.charAt(1);
+//                resultadoR += ""+((9*i)+2+(j*3))+tablero[(9*i)+2+(j*3)].direccion.charAt(2);
+//                resultadoD += ""+((9*j)+6+i)+tablero[(9*j)+6+i].direccion.charAt(3);
+//                resultadoL += ""+((9*(2-i))+(3*j))+tablero[(9*(2-i))+(3*j)].direccion.charAt(4);
+//                resultadoB += ""+((3*j)+18+(2-i))+tablero[(3*j)+18+(2-i)].direccion.charAt(5);
+            
             }
             
             general += ""+resultadoL+" "+resultadoF+" "+resultadoR+" "+resultadoB+"\n";

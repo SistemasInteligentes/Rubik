@@ -32,167 +32,112 @@ public class AgenteRubikBasico implements AgenteRubik {
     }
 
     public void paso1() {
-//        System.out.println("Caso 0");
+        System.out.println("Paso 1");
         buscarEjecutarCasos("P1", "C0", 1, 4, 10);
-//        cubo.print();
-//        System.out.println("Caso 1");
         cubo.rotarCubo(Mov.UP, -1);
         buscarEjecutarCasos("P1", "C1", 9, 4, 10);
-//        cubo.print();
-//        System.out.println("Caso 1");
         cubo.rotarCubo(Mov.UP, -1);
         buscarEjecutarCasos("P1", "C1", 19, 4, 10);
-//        cubo.print();
-        //System.out.println("Caso 2");
         cubo.rotarCubo(Mov.UP, -1);
         buscarEjecutarCasos("P1", "C2", 11, 4, 10);
-        //cubo.print();
-        System.out.println("Paso 1 terminado");
-
+        cubo.print();
+        System.out.println("Paso 1 terminado\n");
         cubo.rotarCubo(Mov.UP, -1);
-
     }
 
     public void paso2() {
         System.out.println("Paso 2");
-        cubo.print();
         buscarEjecutarCasosEsquinas("P2", "C0", 0, 4, 10, 12);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosEsquinas("P2", "C0", 18, 4, 10, 12);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosEsquinas("P2", "C0", 20, 4, 10, 12);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosEsquinas("P2", "C0", 2, 4, 10, 12);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         cubo.rotarCubo(Mov.FRONT, 1);
         cubo.rotarCubo(Mov.FRONT, 1);
         cubo.print();
-        System.out.println("Paso 2 terminado");
+        System.out.println("Paso 2 terminado\n");
     }
 
     public void paso3() {
         System.out.println("Paso 3");
         buscarEjecutarCasosCorona("P3", "C0", 3, 4, 14);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosCorona("P3", "C0", 5, 4, 14);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosCorona("P3", "C0", 23, 4, 14);
         cubo.rotarCubo(Mov.UP, -1);
-        cubo.print();
         buscarEjecutarCasosCorona("P3", "C0", 21, 4, 14);
         cubo.rotarCubo(Mov.UP, -1);
         cubo.print();
-
-        System.out.println("Paso 3 terminado");
-
-        System.out.println("");
+        System.out.println("Paso 3 terminado\n");
     }
 
     public void paso4() {
         System.out.println("Paso 4");
         int rotar = 0;
+        int centro = 10;
+        int numChar = 1;
 
-        int caso = 0;
+        int fFrente = 1;
+        int fIzq = 9;
+        int fDer = 11;
+        int fAtras = 19;
 
-        System.out.println("noOrdenadaUP(7, 16) " + noOrdenadaUP(7, 16));
-        while (noOrdenadaUP(7, 16) && rotar < 4) {
-            System.out.println("while: " + rotar);
+        while (noOrdenadaUP(fFrente, centro, numChar) && rotar < 4) {
             cubo.rotar(Mov.UP, 1);
             rotar++;
         }
-        System.out.println("rotar despues de while " + rotar);
         if (rotar == 4) {
-
-            caso = 3;
-
-        } else if (!noOrdenadaUP(7, 16)) {
-            if (!noOrdenadaUP(15, 16)) {
-                cubo.rotar(Mov.UP, 1);
-                cubo.rotar(Mov.UP, 1);
-
-                caso = 1;
-
-            } else if (!noOrdenadaUP(17, 16)) {
-                cubo.rotar(Mov.UP, 1);
-                caso = 1;
-            } else if (!noOrdenadaUP(25, 16)) {
-
-                cubo.rotar(Mov.UP, 1);
-
-                caso = 2;
-
+            buscarEjecutarCasosSegundaCruz("C3");
+            estaSegundaCruz(centro, numChar);
+        } else if (!noOrdenadaUP(fFrente, centro, numChar)) {
+            if (estaSegundaCruz(centro, numChar)) {
+                return;
+            } else {
+                if (!noOrdenadaUP(fDer, centro, numChar)) {
+                    cubo.rotar(Mov.UP, 1);
+                    cubo.rotar(Mov.UP, 1);
+                    buscarEjecutarCasosSegundaCruz("C1");
+                    estaSegundaCruz(centro, numChar);
+                } else if (!noOrdenadaUP(fIzq, centro, numChar)) {
+                    cubo.rotar(Mov.UP, 1);
+                    buscarEjecutarCasosSegundaCruz("C1");
+                    estaSegundaCruz(centro, numChar);
+                } else if (!noOrdenadaUP(fAtras, centro, numChar)) {
+                    cubo.rotar(Mov.UP, 1);
+                    buscarEjecutarCasosSegundaCruz("C2");
+                    estaSegundaCruz(centro, numChar);
+                }
             }
         }
-
-        switch (caso) {
-            case 1:
-                for (int j = 0; j < memoria.length; j++) {
-                    if (memoria[j][0].equals("P4") && memoria[j][1].equals("C1")) {
-                        System.out.println("El algoritmo es: Caso1 [" + memoria[j][4] + "]");
-                        String aux = armarAlgoritmo(j);
-                        ruta = ruta.concat(aux);
-                        cubo.correrAlgoritmo(aux);
-                        if (estaSegundaCruz()) {
-                            return;
-                        }
-                        break;
-                    }
-                }
-                break;
-            case 2:
-                for (int j = 0; j < memoria.length; j++) {
-                    if (memoria[j][0].equals("P4") && memoria[j][1].equals("C2")) {
-                        System.out.println("El algoritmo es: Caso2 [" + memoria[j][4] + "]");
-                        String aux = armarAlgoritmo(j);
-                        ruta = ruta.concat(aux);
-                        cubo.correrAlgoritmo(aux);
-                        if (estaSegundaCruz()) {
-                            return;
-                        }
-                        break;
-                    }
-                }
-
-                break;
-            case 3:
-
-                for (int j = 0; j < memoria.length; j++) {
-                    if (memoria[j][0].equals("P4") && memoria[j][1].equals("C3")) {
-                        System.out.println("El algoritmo es: Caso3 [" + memoria[j][4] + "]");
-                        String aux = armarAlgoritmo(j);
-                        ruta = ruta.concat(aux);
-                        cubo.correrAlgoritmo(aux);
-                        if (estaSegundaCruz()) {
-                            return;
-                        }
-                        break;
-                    }
-                }
-                break;
-
-        }
-
-        System.out.println("Paso 4 terminado");
+        cubo.print();
+        System.out.println("Paso 4 terminado\n");
     }
 
-    public boolean noOrdenadaUP(int posicion, int centroArriba) {
-        System.out.println("posicion" + posicion);
-        System.out.println("centroArriba charAt(1)" + cubo.tablero[centroArriba].direccion.charAt(1));
-        System.out.println("posicion charAt(1)" + cubo.tablero[posicion].direccion.charAt(1));
-        return (cubo.tablero[centroArriba].direccion.charAt(1)) != (cubo.tablero[posicion].direccion.charAt(1));
-
+    public boolean noOrdenadaUP(int posicion, int centroArriba, int numChar) {
+        return (cubo.tablero[centroArriba].direccion.charAt(numChar)) != (cubo.tablero[posicion].direccion.charAt(numChar));
     }
 
-    public boolean estaSegundaCruz() {
-        boolean flag = (!noOrdenadaUP(7, 16)) && (!noOrdenadaUP(15, 16)) && (!noOrdenadaUP(17, 16)) && (!noOrdenadaUP(25, 16));
+    public boolean estaSegundaCruz(int centroArriba, int numChar) {
+        boolean flag = (!noOrdenadaUP(7, centroArriba, numChar)) && (!noOrdenadaUP(15, 16, numChar)) && (!noOrdenadaUP(17, 16, numChar)) && (!noOrdenadaUP(25, 16, numChar));
         System.out.println("segunda crus? " + flag);
-        return (!noOrdenadaUP(7, 16)) && (!noOrdenadaUP(15, 16)) && (!noOrdenadaUP(17, 16)) && (!noOrdenadaUP(25, 16));
+        return flag;
+    }
+
+    public void buscarEjecutarCasosSegundaCruz(String caso) {
+
+        for (int j = 0; j < memoria.length; j++) {
+            if (memoria[j][0].equals("P4") && memoria[j][1].equals(caso)) {
+                System.out.println("El algoritmo es: Caso:" + caso + " [" + memoria[j][4] + "]");
+                String aux = armarAlgoritmo(j);
+                ruta = ruta.concat(aux);
+                cubo.correrAlgoritmo(aux);
+                break;
+            }
+        }
     }
 
     public void buscarEjecutarCasos(String paso, String caso, int id, int centroFrente, int centroArriba) {
@@ -256,16 +201,11 @@ public class AgenteRubikBasico implements AgenteRubik {
             }
         }
     }
-    //buscar csos de las esquinas ya que hay un nuevo color que dbemos tener en cuenta
-
+    
     public void buscarEjecutarCasosEsquinas(String paso, String caso, int id, int centroFrente, int centroArriba, int centroIzquierda) {
         String orientacion = "";
         for (int i = 0; i < 27; i++) {
             if (cubo.tablero[i].id == id) {
-
-//                System.out.println("PASO 2 La ficha "+id+" esta en: "+i);
-//                System.out.println("La dirección es: "+cubo.tablero[i].direccion);
-//                System.out.println("La ubicación es:");
                 orientacion = cubo.tablero[i].getOrientacionEsquinas(
                         cubo.tablero[centroFrente].direccion.charAt(0),
                         cubo.tablero[centroArriba].direccion.charAt(1),
@@ -277,7 +217,6 @@ public class AgenteRubikBasico implements AgenteRubik {
                     if (memoria[j][0].equals(paso) && memoria[j][1].equals(caso)) {
                         if (memoria[j][2].equals("" + i)) {
                             if (memoria[j][3].equals(orientacion)) {
-                                //System.out.println("El algoritmo es: ["+memoria[j][4]+"]");
                                 String aux = armarAlgoritmo(j);
                                 ruta = ruta.concat(aux);
                                 cubo.correrAlgoritmo(aux);
@@ -294,7 +233,6 @@ public class AgenteRubikBasico implements AgenteRubik {
         String algo = memoria[i][4];
         int aux = 0;
         try {
-//            System.out.println("[[[Memoria]]]: "+i);
             aux = Integer.parseInt(memoria[i][5]);
             algo += armarAlgoritmo(aux);
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
