@@ -19,7 +19,7 @@ public class Rubik {
         // TODO code application logic here
         Cubo cubo = new Cubo();
 //        String a="RFRFD'UFDL'";
-        String a="FFRRF";
+        String a="R'R'FBU'B'LF'L'BR'FUU'BB'B'FF'D'U'RF'U'RURD'R'B'UBFFBLDLFDFBB'UU'L'D'LB'F'";
         cubo.correrAlgoritmo(a);
         System.out.println(cubo.revolver(50));
         
@@ -45,7 +45,7 @@ public class Rubik {
         AgenteRubikBasico juanito= new AgenteRubikBasico(cubo);
 //        System.out.println("Algoritmo de desordenamiento: "+a);
         juanito.ordenarCubo();
-        System.out.println("ruta: "+juanito.ruta);
         cubo.print();
+        System.out.println("ruta: "+juanito.ruta);
     }
 }
