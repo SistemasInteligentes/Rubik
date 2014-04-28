@@ -28,7 +28,7 @@ public class AgenteRubikBasico implements AgenteRubik {
         paso2();
         paso3();
         paso4();
-
+        paso5();
     }
 
     public void paso1() {
@@ -81,32 +81,36 @@ public class AgenteRubikBasico implements AgenteRubik {
         int centro = 10;
         int numChar = 1;
 
-        int fFrente = 1;
-        int fIzq = 9;
-        int fDer = 11;
-        int fAtras = 19;
+        int fichaFrente = 1;
+        int fichaIzq = 9;
+        int fichaDer = 11;
+        int fichaAtras = 19;
 
-        while (noOrdenadaUP(fFrente, centro, numChar) && rotar < 4) {
+        if (estaSegundaCruz(centro, numChar)) {
+                return;
+            }
+        
+        while (noOrdenadaUP(fichaFrente, centro, numChar) && rotar < 4) {
             cubo.rotar(Mov.UP, 1);
             rotar++;
         }
         if (rotar == 4) {
             buscarEjecutarCasosSegundaCruz("C3");
             estaSegundaCruz(centro, numChar);
-        } else if (!noOrdenadaUP(fFrente, centro, numChar)) {
+        } else if (!noOrdenadaUP(fichaFrente, centro, numChar)) {
             if (estaSegundaCruz(centro, numChar)) {
                 return;
             } else {
-                if (!noOrdenadaUP(fDer, centro, numChar)) {
+                if (!noOrdenadaUP(fichaDer, centro, numChar)) {
                     cubo.rotar(Mov.UP, 1);
                     cubo.rotar(Mov.UP, 1);
                     buscarEjecutarCasosSegundaCruz("C1");
                     estaSegundaCruz(centro, numChar);
-                } else if (!noOrdenadaUP(fIzq, centro, numChar)) {
+                } else if (!noOrdenadaUP(fichaIzq, centro, numChar)) {
                     cubo.rotar(Mov.UP, 1);
                     buscarEjecutarCasosSegundaCruz("C1");
                     estaSegundaCruz(centro, numChar);
-                } else if (!noOrdenadaUP(fAtras, centro, numChar)) {
+                } else if (!noOrdenadaUP(fichaAtras, centro, numChar)) {
                     cubo.rotar(Mov.UP, 1);
                     buscarEjecutarCasosSegundaCruz("C2");
                     estaSegundaCruz(centro, numChar);
@@ -116,17 +120,117 @@ public class AgenteRubikBasico implements AgenteRubik {
         cubo.print();
         System.out.println("Paso 4 terminado\n");
     }
+    
+    public void paso5(){
+        System.out.println("Paso 5");
+        int rotar = 0;
+        int centroF = 4;
+        int centroR = 14;
+        int centroB = 22;
+        int centroL = 12;
+        int numCharF = 0;
+        int numCharR = 2;
+        int numCharB = 5;
+        int numCharL = 4;
+
+        int fichaFrente = 1;
+        int fichaIzq = 9;
+        int fichaDer = 11;
+        int fichaAtras = 19;
+        
+        
+        while (!estaSegundaCruzCompleta()&& rotar<10) {
+            
+            if(!noOrdenada(fichaFrente, centroF, numCharF)){
+                System.out.println("1if(!noOrdenada("+fichaFrente+", "+centroF+", "+numCharF+") rotar "+rotar);
+                
+                if(!noOrdenada(fichaDer,centroR,numCharR)){
+               
+                    System.out.println("2if(!noOrdenada("+fichaDer+", "+centroR+", "+numCharR+") rotar "+rotar);
+                    buscarEjecutarCasosSegundaCruzCompleta("C1");
+                    //caso 1 
+                }else if(!noOrdenada(fichaIzq,centroL,numCharL)){
+            
+                    System.out.println("3if(!noOrdenada("+fichaIzq+", "+centroL+", "+numCharL+") rotar "+rotar);
+                    cubo.rotar(Mov.UP, -1);
+                    buscarEjecutarCasosSegundaCruzCompleta("C1");
+                    // U' + caso 1 
+                }else if(!noOrdenada(fichaAtras,centroB,numCharB)){
+                    
+                    System.out.println("4if(!noOrdenada("+fichaAtras+", "+centroB+", "+numCharB+") rotar "+rotar);
+                    buscarEjecutarCasosSegundaCruzCompleta("C2");
+                    cubo.rotarCubo(Mov.UP, 1);
+                    buscarEjecutarCasosSegundaCruzCompleta("C1");
+                    //caso 2 + rotarCuboUP + caso 1
+                }else {
+                   
+                    System.out.println("else rotarCubo rotar "+rotar);
+                    cubo.rotarCubo(Mov.UP, 1);                    
+                }
+            }else{
+        
+                
+                System.out.println("else rotarCara rotar "+rotar);
+                cubo.rotar(Mov.UP, 1); 
+            }
+            
+            rotar++;
+            System.out.println("\n\n");
+        }
+        System.out.println("rotar "+rotar);
+        cubo.print();
+        System.out.println("Paso 5 terminado\n");       
+    }
+    
+    public boolean noOrdenada(int posicion, int centro, int numChar) {
+        return (cubo.tablero[centro].direccion.charAt(numChar)) != (cubo.tablero[posicion].direccion.charAt(numChar));
+    }
 
     public boolean noOrdenadaUP(int posicion, int centroArriba, int numChar) {
         return (cubo.tablero[centroArriba].direccion.charAt(numChar)) != (cubo.tablero[posicion].direccion.charAt(numChar));
     }
 
     public boolean estaSegundaCruz(int centroArriba, int numChar) {
-        boolean flag = (!noOrdenadaUP(7, centroArriba, numChar)) && (!noOrdenadaUP(15, 16, numChar)) && (!noOrdenadaUP(17, 16, numChar)) && (!noOrdenadaUP(25, 16, numChar));
-        System.out.println("segunda crus? " + flag);
+        boolean flag = (!noOrdenadaUP(1, centroArriba, numChar))
+                && (!noOrdenadaUP(11, centroArriba, numChar))
+                &&  (!noOrdenadaUP(9, centroArriba, numChar))
+                &&  (!noOrdenadaUP(19, centroArriba, numChar));
+        System.out.println("segunda cruz? " + flag);
         return flag;
     }
 
+    public boolean estaSegundaCruzCompleta() {
+        boolean flag ;
+//        (!noOrdenada(1, 4, 0)) 
+//                && (!noOrdenadaUP(11, 14, 2)) 
+//                && (!noOrdenadaUP(9, 12, 4)) 
+//                && (!noOrdenadaUP(19, 22, 5));
+        boolean flag1 =(!noOrdenada(1, 4, 0));
+        System.out.println("1 completa? " + flag1);
+        boolean flag2 =(!noOrdenadaUP(11, 14, 2));
+        System.out.println("11 completa? " + flag2);
+        boolean flag3 =(!noOrdenadaUP(9, 12, 4)) ;
+        System.out.println("9 completa? " + flag3);
+        boolean flag4 =(!noOrdenadaUP(19, 22, 5));
+        System.out.println("19 completa? " + flag4);
+        
+        flag = flag1 && flag2 && flag3 && flag4;
+        System.out.println("segunda cruz completa? " + flag);
+        return flag;
+    }
+    public void buscarEjecutarCasosSegundaCruzCompleta(String caso) {
+
+        for (int j = 0; j < memoria.length; j++) {
+            if (memoria[j][0].equals("P5") && memoria[j][1].equals(caso)) {
+                System.out.println("El algoritmo es: Caso:" + caso + " [" + memoria[j][4] + "]");
+                String aux = armarAlgoritmo(j);
+                ruta = ruta.concat(aux);
+                cubo.correrAlgoritmo(aux);
+                break;
+            }
+        }
+    }
+    
     public void buscarEjecutarCasosSegundaCruz(String caso) {
 
         for (int j = 0; j < memoria.length; j++) {
@@ -348,7 +452,9 @@ public class AgenteRubikBasico implements AgenteRubik {
         /*  8   */ {"P3", "C0", "21", "LB", "ULUL'U'B'UBB'UUB", "84"},
         /*  9   */ {"P4", "C1", "x", "x", "FURU'R'F'"},
         /*  100 */ {"P4", "C2", "x", "x", "FRUR'U'F'"},
-        /*  1   */ {"P4", "C3", "x", "x", "FURU'R'F'U", "100"}
+        /*  1   */ {"P4", "C3", "x", "x", "FURU'R'F'U", "100"},
+        /*  100 */ {"P5", "C1", "x", "x", "R'U'RU'R'UURU'"},
+        /*  1   */ {"P5", "C2", "x", "x", "R'U'RU'R'UUR"}
 
     };
     /*
