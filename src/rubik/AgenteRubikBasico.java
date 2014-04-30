@@ -29,6 +29,7 @@ public class AgenteRubikBasico implements AgenteRubik {
         paso3();
         paso4();
         paso5();
+        paso6();
     }
 
     public void paso1() {
@@ -142,44 +143,140 @@ public class AgenteRubikBasico implements AgenteRubik {
         while (!estaSegundaCruzCompleta()&& rotar<10) {
             
             if(!noOrdenada(fichaFrente, centroF, numCharF)){
-                System.out.println("1if(!noOrdenada("+fichaFrente+", "+centroF+", "+numCharF+") rotar "+rotar);
+//                System.out.println("1if(!noOrdenada("+fichaFrente+", "+centroF+", "+numCharF+") rotar "+rotar);
                 
                 if(!noOrdenada(fichaDer,centroR,numCharR)){
                
-                    System.out.println("2if(!noOrdenada("+fichaDer+", "+centroR+", "+numCharR+") rotar "+rotar);
+//                    System.out.println("2if(!noOrdenada("+fichaDer+", "+centroR+", "+numCharR+") rotar "+rotar);
                     buscarEjecutarCasosSegundaCruzCompleta("C1");
                     //caso 1 
                 }else if(!noOrdenada(fichaIzq,centroL,numCharL)){
             
-                    System.out.println("3if(!noOrdenada("+fichaIzq+", "+centroL+", "+numCharL+") rotar "+rotar);
+//                    System.out.println("3if(!noOrdenada("+fichaIzq+", "+centroL+", "+numCharL+") rotar "+rotar);
                     cubo.rotar(Mov.UP, -1);
                     buscarEjecutarCasosSegundaCruzCompleta("C1");
                     // U' + caso 1 
                 }else if(!noOrdenada(fichaAtras,centroB,numCharB)){
                     
-                    System.out.println("4if(!noOrdenada("+fichaAtras+", "+centroB+", "+numCharB+") rotar "+rotar);
+//                    System.out.println("4if(!noOrdenada("+fichaAtras+", "+centroB+", "+numCharB+") rotar "+rotar);
                     buscarEjecutarCasosSegundaCruzCompleta("C2");
                     cubo.rotarCubo(Mov.UP, 1);
                     buscarEjecutarCasosSegundaCruzCompleta("C1");
                     //caso 2 + rotarCuboUP + caso 1
                 }else {
                    
-                    System.out.println("else rotarCubo rotar "+rotar);
+//                    System.out.println("else rotarCubo rotar "+rotar);
                     cubo.rotarCubo(Mov.UP, 1);                    
                 }
             }else{
         
                 
-                System.out.println("else rotarCara rotar "+rotar);
+//                System.out.println("else rotarCara rotar "+rotar);
                 cubo.rotar(Mov.UP, 1); 
             }
             
             rotar++;
-            System.out.println("\n\n");
+//            System.out.println("\n\n");
         }
-        System.out.println("rotar "+rotar);
+//        System.out.println("rotar "+rotar);
+        cubo.rotarCubo(Mov.RIGHT, -1);
         cubo.print();
+        cubo.rotarCubo(Mov.RIGHT, 1);
         System.out.println("Paso 5 terminado\n");       
+    }
+    
+    public void paso6(){
+        System.out.println("Paso 6");
+        String caso = "C0";
+        int rotar = 0;
+        int esq0 = 0;
+        int esq2 = 2;
+        int esq18 = 18;
+        int esq20 = 20;
+        int centroF = 4;
+        int centroR = 14;
+        int centroB = 22;
+        int centroL = 12;
+        int centroU = 10;
+        int cF = 0;
+        int cR = 2;
+        int cB = 5;
+        int cL = 4;
+        int cU = 1;
+        
+        if (estaUltimasEsquinas()){
+            System.out.println("caso: "+caso);
+        }else{
+            while(rotar<4){
+
+                if(esquinaCorrecta(esq0, centroL, centroB, centroU, cL, cB, cU)){
+                    if(esquinaCorrecta(esq2, centroF, centroR, centroU, cF, cR, cU)){
+                        if(esquinaCorrecta(esq18, centroB, centroR, centroU, cB, cR, cU)){
+                            caso = "C1";
+                            System.out.println("caso: "+caso);
+                            break;
+                        }
+                    }
+                }else if(esquinaCorrecta(esq0, centroF, centroL, centroU, cF, cL, cU)){
+                    if(esquinaCorrecta(esq2, centroB, centroR, centroU, cB, cR, cU)){
+                        if(esquinaCorrecta(esq18, centroF, centroR, centroU, cF, cR, cU)){
+                            caso = "C2";
+                            System.out.println("caso: "+caso);
+                            break;
+                        }
+                    }
+                }else if(esquinaCorrecta(esq0, centroF, centroR, centroU, cF, cR, cU)){
+                    if(esquinaCorrecta(esq2, centroF, centroL, centroU, cF, cL, cU)){
+                        if(esquinaCorrecta(esq18, centroB, centroR, centroU, cB, cR, cU)){
+                            caso = "C3";
+                            System.out.println("caso: "+caso);
+                            break;
+                        }
+                    }
+                }else if(esquinaCorrecta(esq0, centroB, centroR, centroU, cB, cR, cU)){
+                    if(esquinaCorrecta(esq2, centroB, centroL, centroU, cB, cL, cU)){
+                        if(esquinaCorrecta(esq18, centroF, centroR, centroU, cF, cR, cU)){
+                            caso = "C4";
+                            System.out.println("caso: "+caso);
+                            break;
+                        }
+                    }
+                }else{
+                    System.out.println("else caso diferente");
+                    System.out.println("cubo.tablero[0].dir "+cubo.tablero[0].direccion);
+                    System.out.println("cubo.tablero[2].dir "+cubo.tablero[2].direccion);
+                    System.out.println("cubo.tablero[18].dir "+cubo.tablero[18].direccion);
+                    System.out.println("cubo.tablero[20].dir "+cubo.tablero[20].direccion);
+                }
+
+                System.out.println("ninguna de los casos");
+                    System.out.println("cubo.tablero[0].dir "+cubo.tablero[0].direccion);
+                    System.out.println("cubo.tablero[2].dir "+cubo.tablero[2].direccion);
+                    System.out.println("cubo.tablero[18].dir "+cubo.tablero[18].direccion);
+                    System.out.println("cubo.tablero[20].dir "+cubo.tablero[20].direccion);
+                cubo.rotarCubo(Mov.UP, 1);
+                rotar++;
+            }
+        
+            System.out.println("rotar: "+rotar);
+            buscarEjecutarCasosUltimasEsquinas(caso);
+        }
+        
+        cubo.rotarCubo(Mov.RIGHT, -1);
+        cubo.print();
+        System.out.println("Paso 6 terminado\n");    
+    }
+    
+    public boolean esquinaCorrecta(int posTablero, int centro1, int centro2, int centro3, int char1, int char2, int char3){
+        if(cubo.tablero[posTablero].direccion.contains(""+cubo.tablero[centro1].direccion.charAt(char1))){
+            if(cubo.tablero[posTablero].direccion.contains(""+cubo.tablero[centro2].direccion.charAt(char2))){
+               if(cubo.tablero[posTablero].direccion.contains(""+cubo.tablero[centro3].direccion.charAt(char3))){
+                   System.out.println("cubo.tablero["+posTablero+"].id "+cubo.tablero[posTablero].id+" cubo.tablero["+posTablero+"].dir "+cubo.tablero[posTablero].direccion);
+                   return true;
+               }            
+           }               
+       }
+        return false;
     }
     
     public boolean noOrdenada(int posicion, int centro, int numChar) {
@@ -200,24 +297,56 @@ public class AgenteRubikBasico implements AgenteRubik {
     }
 
     public boolean estaSegundaCruzCompleta() {
-        boolean flag ;
-//        (!noOrdenada(1, 4, 0)) 
-//                && (!noOrdenadaUP(11, 14, 2)) 
-//                && (!noOrdenadaUP(9, 12, 4)) 
-//                && (!noOrdenadaUP(19, 22, 5));
-        boolean flag1 =(!noOrdenada(1, 4, 0));
-        System.out.println("1 completa? " + flag1);
-        boolean flag2 =(!noOrdenadaUP(11, 14, 2));
-        System.out.println("11 completa? " + flag2);
-        boolean flag3 =(!noOrdenadaUP(9, 12, 4)) ;
-        System.out.println("9 completa? " + flag3);
-        boolean flag4 =(!noOrdenadaUP(19, 22, 5));
-        System.out.println("19 completa? " + flag4);
-        
-        flag = flag1 && flag2 && flag3 && flag4;
-        System.out.println("segunda cruz completa? " + flag);
+        boolean flag =
+                    (!noOrdenada(1, 4, 0)) 
+                && (!noOrdenadaUP(11, 14, 2)) 
+                && (!noOrdenadaUP(9, 12, 4)) 
+                && (!noOrdenadaUP(19, 22, 5));
+
         return flag;
     }
+    
+    public boolean estaUltimasEsquinas() {
+//        boolean flag =
+//                esquinaCorrecta(0, 12, 4, 10, 4, 0, 1)
+//                && esquinaCorrecta(2, 4, 14, 10, 0, 2, 1)
+//                && esquinaCorrecta(18, 22, 12, 10, 5, 4, 1)
+//                && esquinaCorrecta(20, 22, 14, 10, 5, 2, 1);
+        
+        boolean flag1 =
+                esquinaCorrecta(0, 12, 4, 10, 4, 0, 1);
+        System.out.println("flag1: "+flag1);
+        boolean flag2 = esquinaCorrecta(2, 4, 14, 10, 0, 2, 1);
+        System.out.println("flag2: "+flag2);
+        boolean flag3 = esquinaCorrecta(18, 22, 12, 10, 5, 4, 1);
+        System.out.println("flag3: "+flag3);
+        boolean flag4 = esquinaCorrecta(20, 22, 14, 10, 5, 2, 1);
+        System.out.println("flag4: "+flag4);
+        boolean flag = flag1 && flag2 && flag3 && flag4;
+        
+        System.out.println("flag: "+flag);
+        System.out.println("cubo.tablero[0].dir "+cubo.tablero[0].direccion);
+        System.out.println("cubo.tablero[2].dir "+cubo.tablero[2].direccion);
+        System.out.println("cubo.tablero[18].dir "+cubo.tablero[18].direccion);
+        System.out.println("cubo.tablero[20].dir "+cubo.tablero[20].direccion);
+            
+
+        return flag;
+    }
+    
+    public void buscarEjecutarCasosUltimasEsquinas(String caso) {
+
+        for (int j = 0; j < memoria.length; j++) {
+            if (memoria[j][0].equals("P6") && memoria[j][1].equals(caso)) {
+                System.out.println("El algoritmo es: Caso:" + caso + " [" + memoria[j][4] + "]");
+                String aux = armarAlgoritmo(j);
+                ruta = ruta.concat(aux);
+                cubo.correrAlgoritmo(aux);
+                break;
+            }
+        }
+    }
+    
     public void buscarEjecutarCasosSegundaCruzCompleta(String caso) {
 
         for (int j = 0; j < memoria.length; j++) {
@@ -453,8 +582,12 @@ public class AgenteRubikBasico implements AgenteRubik {
         /*  9   */ {"P4", "C1", "x", "x", "FURU'R'F'"},
         /*  100 */ {"P4", "C2", "x", "x", "FRUR'U'F'"},
         /*  1   */ {"P4", "C3", "x", "x", "FURU'R'F'U", "100"},
-        /*  100 */ {"P5", "C1", "x", "x", "R'U'RU'R'UURU'"},
-        /*  1   */ {"P5", "C2", "x", "x", "R'U'RU'R'UUR"}
+        /*  2   */ {"P5", "C1", "x", "x", "R'U'RU'R'UURU'"},
+        /*  3   */ {"P5", "C2", "x", "x", "R'U'RU'R'UUR"},
+        /*  4   */ {"P6", "C1", "x", "x", "L'URU'LUR'U'"},
+        /*  5   */ {"P6", "C2", "x", "x", "RU'L'UR'U'LU"},
+        /*  6   */ {"P6", "C3", "x", "x", "FURU'R'URU'R'URU'R'F'"},
+        /*  7   */ {"P6", "C4", "x", "x", "FBUUF'B'R'L'UURLUU"}
 
     };
     /*
