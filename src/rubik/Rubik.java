@@ -22,6 +22,9 @@ public class Rubik {
 ///*probar el P5*/        String a="R'R'FBU'B'LF'L'BR'FUU'BB'B'FF'D'U'RF'U'RURD'R'B'UBFFBLDLFDFBB'UU'L'D'LB'F'UDDRR'R'B'B'B'BBFLF'FF'B'DR'LFB'B'L'B'BD'LFLU'DD'DUR'LRB'R'BR'LR'D'F'L'BBF";
 ///*probar el P5*/        String a="D'RD'R'BLBFU'FUFL'LL'LB'FULF'D'UBF'RFDUU'RUU'B'U'U'UL'LLDU'B'LBF'LDDF'";
 ///*probar el P4*/        String a= "D'U'D'R'L'LUD'R'B'F'D'DLRBB'DR'LBU'R'F'FLR'R'LDBR'R'F'R'BR'FU'R'B'FDF'D'R'DD'RD'";  
+
+///*probar el P7*/        String a= "B'DF'UR'D'B'FUD'R'URL'FBR'R'BURBRDL'BRL'F'LR'R'FR'DR'D'F'DLLB'LF'LL'BLBR";
+///*probar el P7*/        String a= "LL'UUFD'UF'RL'LU'R'FDU'UD'FDR'R'B'BLFL'B'D'UU'B'DF'RDLU'B'L'R'U'U'RU'B'B'LR'D";
 //        cubo.correrAlgoritmo(a);
         System.out.println(cubo.revolver(50));
         

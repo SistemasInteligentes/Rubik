@@ -60,15 +60,10 @@ public class FichaRubik {
         char frontal='x';
         char superior='x';
         char izquierda='x';
-//        System.out.println("Dirección es: "+direccion);
-//        System.out.println("Buscando...: "+f+" "+u+" "+l);
         
         for(int i=0;i<6;i++){
             t=direccion.charAt(i);
-//            System.out.println("Buscando t=: "+t);
-//            System.out.println("Comparando con =: "+f);
             if (t==f){
-                //System.out.println("LA ENCONTREE "+f);
                 frontal = getLetra(i);
             }
         }
@@ -80,8 +75,6 @@ public class FichaRubik {
         }
         for(int i=0;i<6;i++){
             t=direccion.charAt(i);
-//            System.out.println("++Buscando t=: "+t);
-//            System.out.println("++Comparando con =: "+l);
             if (t==l){
                 izquierda = getLetra(i);
             }
